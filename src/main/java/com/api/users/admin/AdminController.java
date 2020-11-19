@@ -6,6 +6,7 @@ import com.api.users.librarian.Librarian;
 import com.api.users.librarian.LibrarianRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,5 +50,10 @@ public class AdminController {
     @PostMapping("/libs")
     public void addLibrarian(@RequestBody Librarian lib) {
         libRepo.save(lib);
+    }
+
+    @DeleteMapping("/libs/{id}")
+    public void deleteLibrarian(@PathVariable Integer id) {
+        libRepo.deleteById(id);
     }
 }
