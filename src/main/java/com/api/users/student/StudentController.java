@@ -2,6 +2,9 @@ package com.api.users.student;
 
 import java.util.List;
 
+import com.api.issuedbook.IssuedBook;
+import com.api.issuedbook.IssuedBookRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +17,9 @@ public class StudentController {
 
     @Autowired
     private StudentRepo repo;
+
+    @Autowired
+    private IssuedBookRepo iRepo;
 
     @GetMapping("/students")
     public List<Student> getStudents() {
@@ -28,5 +34,10 @@ public class StudentController {
     @PostMapping("/students")
     public void addStudent(@RequestBody Student stu) {
         repo.save(stu);
+    }
+
+    @GetMapping("/mybooks/{id}")
+    public List<IssuedBook> getIssuedBook(@PathVariable Integer id) {
+        return (List<IssuedBook>) iRepo.selectByStudentId(id);
     }
 }
